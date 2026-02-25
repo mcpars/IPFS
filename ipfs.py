@@ -6,10 +6,10 @@ def pin_to_ipfs(data):
 	assert isinstance(data,dict), f"Error pin_to_ipfs expects a dictionary"
 
 	project_id = os.getenv("INFURA_IPFS_PROJECT_ID")
-	project_secret - os.getenv("INFURA_IPFS_PROJECT_SECRET")
+	project_secret = os.getenv("INFURA_IPFS_PROJECT_SECRET")
 
 	url = "https://ipfs.infura.io:5001/api/v0/add"
-	payload = json.dump(data)
+	payload = json.dumps(data)
 
 	files = {
 	"file": ("data.json", payload, "application/json")
