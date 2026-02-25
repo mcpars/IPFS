@@ -6,7 +6,7 @@ def pin_to_ipfs(data):
     assert isinstance(data, dict), "Error pin_to_ipfs expects a dictionary"
 
     # Prefer JWT if available (easiest)
-    jwt = os.getenv("PINATA_JWT")
+    jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIyZWRmYzFlZC03ZjZmLTRmYmYtYWIzMS0xZWVkMjE2MmViZDciLCJlbWFpbCI6Im1jcGFyc0BzZWFzLnVwZW5uLmVkdSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6IkZSQTEifSx7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6Ik5ZQzEifV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiJiZTJkOWFmYmJkMjg4ZDllZWZiNCIsInNjb3BlZEtleVNlY3JldCI6IjQ4ZTQzNWQyNGRjNTNiY2ZhMGNlNWI0NjM3MjA1ZjA4MmUyZTVkZDRkZjY5ZDg5ZWIyNzQwN2FiMjQyZTBiNzIiLCJleHAiOjE4MDM1MjEyMDF9.9eh9pXfQkFt1pupL8vgvRb6fVsN3fv85cPHN5aGAihc"
     
     url = "https://api.pinata.cloud/pinning/pinJSONToIPFS"
     headers = {"Authorization": f"Bearer {jwt}"}
