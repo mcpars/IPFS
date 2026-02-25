@@ -1,9 +1,33 @@
 import requests
 import json
+import os
 
 def pin_to_ipfs(data):
 	assert isinstance(data,dict), f"Error pin_to_ipfs expects a dictionary"
-	#YOUR CODE HERE
+
+	project_id = os.getenv("INFURA_IPFS_PROJECT_ID")
+	project_secret - os.getenv("INFURA_IPFS_PROJECT_SECRET")
+
+	url = "https://ipfs.infura.io:5001/api/v0/add"
+	payload = json.dump(data)
+
+	files = {
+	"file": ("data.json", payload, "application/json")
+			
+	}
+
+	response = requests.post(
+
+		url,
+		files = files,
+		auth = (project_id, project_secret),
+		timeout=30,
+		
+	)
+
+	response.raise_for_status()
+	cid = response.json()["Hash"]
+
 
 	return cid
 
