@@ -5,7 +5,7 @@ import os
 def pin_to_ipfs(data):
     assert isinstance(data, dict), "Error pin_to_ipfs expects a dictionary"
 
-    project_id = os.getenv("My First Key")
+    project_id = os.getenv("d59991e8df07469796a0e81d0c148b83")
     project_secret = os.getenv("qoFC5EcbXn1SsjN9kboaGXRvNHKAzM12e6hSghAqHOxxabD5GZGbng")
     
 
