@@ -5,8 +5,8 @@ import os
 def pin_to_ipfs(data):
     assert isinstance(data, dict), "Error pin_to_ipfs expects a dictionary"
 
-    project_id = os.getenv("INFURA_IPFS_PROJECT_ID")
-    project_secret = os.getenv("INFURA_IPFS_PROJECT_SECRET")
+    project_id = os.getenv("My First Key")
+    project_secret = os.getenv("qoFC5EcbXn1SsjN9kboaGXRvNHKAzM12e6hSghAqHOxxabD5GZGbng")
     assert project_id and project_secret, "Missing Infura IPFS credentials in env vars"
 
     url = "https://mainnet.infura.io/v3/d59991e8df07469796a0e81d0c148b83"  
