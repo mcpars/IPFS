@@ -12,7 +12,7 @@ def pin_to_ipfs(data):
 	payload = json.dumps(data)
 
 	files = {
-	"file": ("data.json", payload, "application/json")
+	"file": ("data.json", payload)
 			
 	}
 
