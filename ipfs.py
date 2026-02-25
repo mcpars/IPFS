@@ -2,44 +2,38 @@ import requests
 import json
 import os
 
-
-
 def pin_to_ipfs(data):
-	assert isinstance(data,dict), f"Error pin_to_ipfs expects a dictionary"
+    assert isinstance(data, dict), "Error pin_to_ipfs expects a dictionary"
 
-	project_id = os.getenv("d59991e8df07469796a0e81d0c148b83")
-	project_secret = os.getenv("qoFC5EcbXn1SsjN9kboaGXRvNHKAzM12e6hSghAqHOxxabD5GZGbng")
+    project_id = os.getenv("INFURA_IPFS_PROJECT_ID")
+    project_secret = os.getenv("INFURA_IPFS_PROJECT_SECRET")
+    assert project_id and project_secret, "Missing Infura IPFS credentials in env vars"
 
-	url = "https://gateway.pinata.cloud/ipfs/{cid}"
-	payload = json.dumps(data)
+    url = "https://ipfs.infura.io:5001/api/v0/add"
+    payload = json.dumps(data)
 
-	files = {
-	"file": ("data.json", payload)
-			
-	}
+    files = {"file": ("data.json", payload)}
 
-	response = requests.post(
+    response = requests.post(
+        url,
+        files=files,
+        auth=(project_id, project_secret),
+        timeout=30
+    )
+    response.raise_for_status()
 
-		url,
-		files = files,
-		auth = (project_id, project_secret),
-		timeout=30,
-		
-	)
-
-	response.raise_for_status()
-	cid = response.json()["Hash"]
+    cid = response.json()["Hash"]
+    return cid
 
 
-	return cid
+def get_from_ipfs(cid, content_type="json"):
+    assert isinstance(cid, str), "get_from_ipfs accepts a cid in the form of a string"
 
-def get_from_ipfs(cid,content_type="json"):
-	assert isinstance(cid,str), f"get_from_ipfs accepts a cid in the form of a string"
-	url = f"https://gateway.pinata.cloud/ipfs/{cid}"
-	response = requests.get(url, timeout=30)
-	response.raise_for_status()
+    # gateway for reading (no auth)
+    url = f"https://ipfs.io/ipfs/{cid}"
+    response = requests.get(url, timeout=30)
+    response.raise_for_status()
 
-	data = response.json()
-
-	assert isinstance(data,dict), f"get_from_ipfs should return a dict"
-	return data
+    data = response.json()
+    assert isinstance(data, dict), "get_from_ipfs should return a dict"
+    return data
